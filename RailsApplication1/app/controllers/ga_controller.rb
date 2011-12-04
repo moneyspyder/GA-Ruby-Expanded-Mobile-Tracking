@@ -116,7 +116,10 @@ class GaController < ApplicationController
     visitor_id = get_visitor_id(request.env["HTTP_X_DCMGUID"], account, user_agent, cookie)
 
     # Always try and add the cookie to the response.
-    request.cookies[COOKIE_NAME] = {:value => visitor_id, :expires => COOKIE_PERSISTENCE.to_i + timestamp, :path => COOKIE_PATH}
+    cookie_value = visitor_id
+    cookie_expires = Time.at(COOKIE_PERSISTENCE.to_i + timestamp)
+    cookie_path = COOKIE_PATH
+    cookies[COOKIE_NAME] = {:value => cookie_value, :expires => cookie_expires, :path => COOKIE_PATH}
 
     # Construct the gif hit url.
     utm_url = UTM_GIF_LOCATION + "?" +
