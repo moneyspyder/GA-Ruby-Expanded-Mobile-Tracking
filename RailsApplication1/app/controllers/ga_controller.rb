@@ -37,11 +37,13 @@ class GaController < ApplicationController
 
   # The last octect of the IP address is removed to anonymize the user.
   def get_ip(remote_address)
-    return '' if(remote_address.nil? || remote_address.blank?)
+    return '' if remote_address.nil?
+    remote_address_str = remote_address.to_s
+    return '' if remote_address_str.nil? || remote_address_str.blank?
 
     # Capture the first three octects of the IP address and replace the forth
     # with 0, e.g. 124.455.3.123 becomes 124.455.3.0
-    remote_address.to_s.gsub!(/([^.]+\.[^.]+\.[^.]+\.)[^.]+/,"\\1") + "0"
+    remote_address_str.gsub!(/([^.]+\.[^.]+\.[^.]+\.)[^.]+/,"\\1") + "0"
   end
 
   # Generate a visitor id for this hit.
