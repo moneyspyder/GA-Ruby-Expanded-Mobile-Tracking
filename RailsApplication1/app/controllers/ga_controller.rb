@@ -12,7 +12,7 @@ class GaController < ApplicationController
     response.headers["Cache-Control"] = "private, no-cache, no-cache=Set-Cookie, proxy-revalidate"
     response.headers["Pragma"] = "no-cache"
     response.headers["Expires"] = "Wed, 17 Sep 1975 21:32:10 GMT"
-    
+
     send_data track_pageview
   end
 
@@ -61,8 +61,7 @@ class GaController < ApplicationController
       message = user_agent + get_random_number.to_s
     end
 
-    md5string = Digest::MD5.hexdigest(message);
-
+    md5string = Digest::MD5.hexdigest(message)
     return "0x" + md5string[0, 16]
   end
 
