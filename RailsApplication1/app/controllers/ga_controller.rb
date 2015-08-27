@@ -83,8 +83,10 @@ class GaController < ApplicationController
 
     #puts "--------sending request to GA-----------------------"
     #puts utmurl
-    open(utmurl,"User-Agent" => request.env["HTTP_USER_AGENT"],
-          "Header" => ("Accepts-Language: " + request.env["HTTP_ACCEPT_LANGUAGE"]))
+    user_agent = request.env["HTTP_USER_AGENT"] || ''
+    user_language = request.env["HTTP_ACCEPT_LANGUAGE"] || ''
+    open(utmurl, "User-Agent" => user_agent,
+      "Header" => ("Accepts-Language: " + user_language))
   end
 
   # Track a page view, updates all the cookies and campaign tracker,
