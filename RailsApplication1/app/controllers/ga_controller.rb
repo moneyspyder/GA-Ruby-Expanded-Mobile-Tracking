@@ -141,7 +141,7 @@ class GaController < ApplicationController
     # If the debug parameter is on, add a header to the response that contains
     # the url that was used to contact Google Analytics.
     unless params[:utmdebug].blank?
-      request.headers["X-GA-MOBILE-URL:"] = utmurl
+      response.headers["X-GA-MOBILE-URL"] = utm_url
     end
     # Finally write the gif data to the response.
     write_gif_data()
